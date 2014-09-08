@@ -14,7 +14,7 @@ template <class T>
 class Field {
 public:
     Field(
-        const cv::Vec3u& pSize,
+        const cv::Vec3i& pSize,
         const T& pInitial);
     Field(const Field<T>& pOther);
     Field(Field<T>&& pOther) noexcept;
@@ -23,19 +23,19 @@ public:
     Field<T>& operator=(const Field<T>& val);
     Field<T>& operator=(Field<T>&& val) noexcept;
 
-    Field<T> convolute(const FloatField& pKernel);
+    Field<T> convolute(const Field<double>& pKernel);
 
-    cv::Vec3u& size() const;
+    cv::Vec3i& size() const;
     std::uint32_t total() const;
     
-    T& at(const cv::Vec3u& pPosition) const inline;
-    T at(const cv::Vec3u& pPosition) inline;
+    T& at(const cv::Vec3i& pPosition) const;
+    T at(const cv::Vec3i& pPosition);
 
 protected:
-    std::size_t index(const cv::Vec3u& pPosition) const inline;
+    std::size_t index(const cv::Vec3i& pPosition) const;
 
 private:
-    std::Vec3u mSize;
+    cv::Vec3i mSize;
     std::vector<T> mValues;
 };
 

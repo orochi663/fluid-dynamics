@@ -5,6 +5,6 @@
 /**************************************************************************/
 int main(int argc, char** argv)
 {
-    FluidCanvas lCanvas(64, 64, 0.1, 1.0, 1.0);
+    FluidCanvas lCanvas(cv::Vec3i(64, 64, 1), 0.1, 1.0, 1.0);
     return 0;
 }

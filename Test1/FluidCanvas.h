@@ -13,16 +13,14 @@ class FluidCanvas {
 public:
     // Constructors
     FluidCanvas(
-        const std::uint32_t pWidth,
-        const std::uint32_t pHeight,
+        const cv::Vec3i& pSize,
         const double pTimestep,
         const double pDiffusion,
         const double pViscosity);
     ~FluidCanvas();
     
     // Accessors
-    std::uint32_t width() const;
-    std::uint32_t height() const;
+    const cv::Vec3i& size() const;
     std::uint32_t total() const;
     
     // Computation
@@ -30,8 +28,7 @@ public:
     
 private:
     // Fluid parameters
-    std::uint32_t mWidth;
-    std::uint32_t mHeight;
+    cv::Vec3i mSize;
     double mTimestep;
     double mDiffusion;               // Diffusion speed of the fluid
     double mViscosity;               // Fluid viscosity

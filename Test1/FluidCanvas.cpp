@@ -1,14 +1,13 @@
 #include "FluidCanvas.h"
 
 /**************************************************************************/
-FluidCanvas::FluidCanvas(const std::uint32_t pWidth, const std::uint32_t pHeight, const double pTimestep, const double pDiffusion, const double pViscosity):
-    mWidth(pWidth),
-    mHeight(pHeight),
+FluidCanvas::FluidCanvas(const cv::Vec3i& pSize, const double pTimestep, const double pDiffusion, const double pViscosity):
+    mSize(pSize),
     mTimestep(pTimestep),
     mDiffusion(pDiffusion),
     mViscosity(pViscosity),
-    mVelocities(pWidth, pHeight, cv::Vec2d(0.0, 0.0)),
-    mBufferField(pWidth, pHeight, cv::Vec2d(0.0, 0.0))
+    mVelocities(pSize, cv::Vec2d(0.0, 0.0)),
+    mBufferField(pSize, cv::Vec2d(0.0, 0.0))
 {
 }
 
@@ -30,19 +29,13 @@ void FluidCanvas::addDensitySources(VectorField& pVelocities, const VectorField&
 }
 
 /**************************************************************************/
-std::uint32_t FluidCanvas::width() const
+const cv::Vec3i& FluidCanvas::size() const
 {
-    return mWidth;
-}
-
-/**************************************************************************/
-std::uint32_t FluidCanvas::height() const
-{
-    return mHeight;
+    return mSize;
 }
 
 /**************************************************************************/
 std::uint32_t FluidCanvas::total() const
 {
-    return mWidth * mHeight;
+    return mSize[0] * mSize[1] * mSize[2];
 }
