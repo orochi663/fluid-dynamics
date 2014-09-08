@@ -9,13 +9,12 @@
 
 /**************************************************************************/
 // @name    Field
-// @brief   Defines a 2D field of values
+// @brief   Defines a 3D field of values
 template <class T>
 class Field {
 public:
     Field(
-        const std::uint32_t pWidth,
-        const std::uint32_t pHeight,
+        const cv::Vec3u& pSize,
         const T& pInitial);
     Field(const Field<T>& pOther);
     Field(Field<T>&& pOther) noexcept;
@@ -23,19 +22,20 @@ public:
     
     Field<T>& operator=(const Field<T>& val);
     Field<T>& operator=(Field<T>&& val) noexcept;
+
+    Field<T> convolute(const FloatField& pKernel);
+
+    cv::Vec3u& size() const;
+    std::uint32_t total() const;
     
-    Field<T> operator+(const Field<T>& val) const;
-    Field<T> operator-(const Field<T>& val) const;
-    Field<T> operator*(const double val) const;
+    T& at(const cv::Vec3u& pPosition) const inline;
+    T at(const cv::Vec3u& pPosition) inline;
 
 protected:
-    std::size_t index(
-        const std::uint32_t pX,
-        const std::uint32_t pY) const;
+    std::size_t index(const cv::Vec3u& pPosition) const inline;
 
 private:
-    std::uint32_t mWidth;
-    std::uint32_t mHeight;
+    std::Vec3u mSize;
     std::vector<T> mValues;
 };
 
