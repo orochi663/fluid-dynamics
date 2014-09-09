@@ -1,0 +1,3 @@
+[submodule "Documentation/WebGL"]
+	path = Documentation/WebGL
+	url = http://github.com/gpjt/webgl-lessons
